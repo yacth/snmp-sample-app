@@ -1,0 +1,14 @@
+# Xmake cache
+.xmake/
+build/
+makefile
+
+# General build artifacts
+*.o
+*.obj
+*.exe
+
+vsxmake2022/
+
+# for VS Code
+.vscode/
