@@ -83,7 +83,11 @@ namespace sensuron
       {
 
         const char *output = vb.get_printable_value();
-        memcpy(&_payloadBuffer, output, sizeof(_payloadBuffer));
+        size_t outputLength = strlen(output);
+        if (outputLength < sizeof(_payloadBuffer))
+        {
+          memcpy(_payloadBuffer, output, outputLength + 1); // +1 to include null terminator
+        }
       }
     }
   }
