@@ -1,5 +1,12 @@
 # Instructions: snmp-sample-app
 
+# Updates
+
+- [10/09/2024] - CLI-0.1 https://github.com/yacth/snmp-sample-app/tree/CLI-0.1
+- [10/09/2024] - GUI-0.1 https://github.com/yacth/snmp-sample-app/tree/GUI-0.1
+
+---
+
 # Overview
 
 The `snmp-sample-app` includes:
@@ -19,7 +26,7 @@ The `snmp-sample-app` includes:
 
 # Installation
 
-To run the application, create a folder in which the `snmp-sample-app`  will be installed and run the following command into the directory using your preferred terminal.
+To run the application, create a folder in which the `snmp-sample-app`  will be installed, then run the following command using the terminal.
 
 ```bash
 git clone https://github.com/yacth/snmp-sample-app.git
