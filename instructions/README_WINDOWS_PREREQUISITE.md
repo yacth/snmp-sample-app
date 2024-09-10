@@ -4,7 +4,7 @@
 
 `MSYS2` will be used to have a `UNIX-like` environment for the purpose of the building of the `snmp-sample-app` .
 
-Install [MSYS2](https://www.msys2.org/) by downloading the [msys2-x86_64-20240727.exe](https://github.com/msys2/msys2-installer/releases/download/2024-07-27/msys2-x86_64-20240727.exe)
+Install [MSYS2](https://www.msys2.org/) by downloading the [msys2-x86_64-20240727.exe](https://github.com/msys2/msys2-installer/releases/download/2024-07-27/msys2-x86_64-20240727.exe).
 
 1. Run the installer to install `MSYS2` .
 2. Follow the instructions to install `MSYS2` into the `C:\msys64` location as per default settings.
