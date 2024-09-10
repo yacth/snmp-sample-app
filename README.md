@@ -26,7 +26,7 @@ The `snmp-sample-app` includes:
 
 # Installation
 
-To run the application, create a folder in which the `snmp-sample-app`  will be installed and run the following command into the directory using your preferred terminal.
+To run the application, create a folder in which the `snmp-sample-app`  will be installed, then run the following command using the terminal.
 
 ```bash
 git clone https://github.com/yacth/snmp-sample-app.git
