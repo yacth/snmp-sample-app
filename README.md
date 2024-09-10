@@ -1,5 +1,12 @@
 # Instructions: snmp-sample-app
 
+# Updates
+
+- [10/09/2024] - CLI-0.1 https://github.com/yacth/snmp-sample-app/tree/CLI-0.1
+- [10/09/2024] - GUI-0.1 https://github.com/yacth/snmp-sample-app/tree/GUI-0.1
+
+---
+
 # Overview
 
 The `snmp-sample-app` includes:
