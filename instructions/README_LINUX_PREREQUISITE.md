@@ -9,7 +9,7 @@ Run the following commands in the terminal:
 ```bash
 sudo apt update
 sudo apt upgrade
-sudo apt install cmake
+sudo apt install cmake g++
 sudo apt install autoconf unzip libtool pkg-config libssl-dev libtomcrypt1
 ```
 
