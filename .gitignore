@@ -3,6 +3,8 @@
 build/
 makefile
 
+vsxmake2022/
+
 # snmp_pp config file
 external/snmp_pp/config.h
 external/snmp_pp/include/snmp_pp/config_snmp_pp.h
