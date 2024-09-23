@@ -15,7 +15,6 @@ int main(int argc, char *argv[])
   char sensuronPort[MAX_ARG_STRING_SIZE] = SENSURON_PORT;
   char inputOid[MAX_ARG_STRING_SIZE] = SENSURON_RECEIVE_DATA_OID;
   char outputOid[MAX_ARG_STRING_SIZE] = SENSURON_SEND_DATA_OID;
-  char commandBuffer[PAYLOAD_SIZE] = "Test Command!";
 
   if (argc > 1 && argc < 5)
   {
@@ -31,12 +30,6 @@ int main(int argc, char *argv[])
     return 1;
   }
 
-  if (argc > 5)
-  {
-    std::strncpy(commandBuffer, argv[5], sizeof(commandBuffer) - 1);
-    commandBuffer[sizeof(commandBuffer) - 1] = '\0'; // Ensure null termination
-  }
-
   DefaultLog::log()->set_filter(ERROR_LOG, 0);
   DefaultLog::log()->set_filter(DEBUG_LOG, 0); // Set logging level of DEBUG to 0 to suppress debug logging
 
@@ -47,25 +40,26 @@ int main(int argc, char *argv[])
   sensuronAgent->setSendDataOid(inputOid);
   sensuronAgent->setReceiveDataOid(outputOid);
 
-  sensuronAgent->init();
-
-  sensuronAgent->setCommand(commandBuffer);
-
-  sensuronAgent->receivePayload();
-
+  char payloadBuffer[PAYLOAD_SIZE] = {0};
   sensuron::sensuronPayload_t sensuronPayload{0};
 
-  sensuronPayload = sensuronAgent->getPayload();
-
-  std::cout << "UINT32 value: " << sensuronPayload.payload1 << std::endl;
-  std::cout << "FLOAT  value: " << sensuronPayload.payload2 << std::endl;
-  std::cout << "FLOAT  array: " << std::endl;
-
-  for (int i = 0; i < sizeof(sensuronPayload.payload3) / sizeof(sensuronPayload.payload3[0]); ++i)
+  sensuronPayload.payload1 = 123456;
+  sensuronPayload.payload2 = 123.456;
+  for (int i = 0; i < sizeof(sensuronPayload.payload3) / sizeof(sensuronPayload.payload3[0]); i++)
   {
-    printf("Element %d: 0x%08x\n", i, *reinterpret_cast<unsigned int *>(&sensuronPayload.payload3[i]));
+    sensuronPayload.payload3[i] = i + 0.123;
   }
-  std::cout << std::endl;
+
+  memcpy(payloadBuffer, &sensuronPayload, sizeof(sensuronPayload));
+
+  sensuronAgent->init();
+
+  sensuronAgent->setPayload(payloadBuffer);
+
+  while (true)
+  {
+    sensuronAgent->sendPayload();
+  }
 
   return 0;
 }

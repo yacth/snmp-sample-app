@@ -41,11 +41,11 @@ namespace sensuron
 
     void handleGetRequest();
 
-    void sendCommand();
+    void sendPayload();
 
-    void receivePayload();
+    void receiveCommand();
 
-    void setCommand(const char *commandBuffer);
+    void setPayload(const char *payloadBuffer);
 
     void setSensuronIpAddress(const char *sensuronIpAddress);
     void setSensuronPort(const char *sensuronPort);
@@ -55,6 +55,7 @@ namespace sensuron
     void stop();
 
     sensuronPayload_t getPayload();
+
 
   private:
     Snmp *_snmp;

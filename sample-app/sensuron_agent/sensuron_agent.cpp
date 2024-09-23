@@ -67,7 +67,7 @@ namespace sensuron
       if (_sendDataPdu->get_vb(vb, i))
       {
 
-        vb.set_value(_commandBuffer);
+        vb.set_value(_payloadBuffer);
         _sendDataPdu->set_vb(vb, i);
       }
     }
@@ -84,15 +84,15 @@ namespace sensuron
 
         const char *output = vb.get_printable_value();
         size_t outputLength = strlen(output);
-        if (outputLength < sizeof(_payloadBuffer))
+        if (outputLength < sizeof(_commandBuffer))
         {
-          memcpy(_payloadBuffer, output, outputLength + 1); // +1 to include null terminator
+          memcpy(_commandBuffer, output, outputLength + 1); // +1 to include null terminator
         }
       }
     }
   }
 
-  void SensuronAgent::sendCommand()
+  void SensuronAgent::sendPayload()
   {
     int status = 0;
 
@@ -105,7 +105,7 @@ namespace sensuron
     }
   }
 
-  void SensuronAgent::receivePayload()
+  void SensuronAgent::receiveCommand()
   {
     int status = 0;
 
@@ -118,10 +118,10 @@ namespace sensuron
     handleGetRequest();
   }
 
-  void SensuronAgent::setCommand(const char *commandBuffer)
+  void SensuronAgent::setPayload(const char *payloadBuffer)
   {
-    memcpy(_commandBuffer, commandBuffer, sizeof(_commandBuffer));
-    std::cout << "SENSURON::DEBUG: Command buffer: " << _commandBuffer << std::endl;
+    memcpy(_payloadBuffer, payloadBuffer, sizeof(_payloadBuffer));
+    std::cout << "SENSURON::DEBUG: Payload buffer: " << _payloadBuffer << std::endl;
   }
 
   void SensuronAgent::setSensuronIpAddress(const char *sensuronIpAddress)
