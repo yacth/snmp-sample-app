@@ -22,12 +22,14 @@ using namespace Snmp_pp;
 
 namespace sensuron
 {
+#pragma pack(push, 1) // Set alignment to 1 byte
   struct SensuronPayload
   {
     uint32_t payload1;
     float payload2;
     float payload3[PAYLOAD_ARRAY_SIZE];
   } typedef sensuronPayload_t;
+#pragma pack(pop) // Restore the previous alignment
 
   class SensuronAgent
   {
@@ -45,7 +47,7 @@ namespace sensuron
 
     void receiveCommand();
 
-    void setPayload(const char *payloadBuffer);
+    void setPayload(const char *payloadBuffer, size_t payloadBufferSize);
 
     void setSensuronIpAddress(const char *sensuronIpAddress);
     void setSensuronPort(const char *sensuronPort);

@@ -63,7 +63,7 @@ static const char *loggerModuleName = "snmp++.usm_v3";
 #define min(a,b) ( (a) < (b) ? (a) : (b) )
 #endif
 
-#define MAX_LINE_LEN 2048  // Max line length in usm user files
+#define MAX_LINE_LEN 2050 * 4  // Max line length in usm user files
 
 // structure for key update
 struct UsmKeyUpdate

@@ -118,9 +118,9 @@ namespace sensuron
     handleGetRequest();
   }
 
-  void SensuronAgent::setPayload(const char *payloadBuffer)
+  void SensuronAgent::setPayload(const char *payloadBuffer, size_t payloadBufferSize)
   {
-    memcpy(_payloadBuffer, payloadBuffer, sizeof(_payloadBuffer));
+    memcpy(_payloadBuffer, payloadBuffer, payloadBufferSize);
     std::cout << "SENSURON::DEBUG: Payload buffer: " << _payloadBuffer << std::endl;
   }
 

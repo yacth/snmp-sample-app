@@ -9,7 +9,7 @@ using namespace Snmp_pp;
 
 #define MAX_ARG_STRING_SIZE
 
-int main(int argc, char *argv[])
+int main(int argc, char* argv[])
 {
   char sensuronPortIpAddress[MAX_ARG_STRING_SIZE] = SENSURON_IP_ADDR;
   char sensuronPort[MAX_ARG_STRING_SIZE] = SENSURON_PORT;
@@ -33,28 +33,29 @@ int main(int argc, char *argv[])
   DefaultLog::log()->set_filter(ERROR_LOG, 0);
   DefaultLog::log()->set_filter(DEBUG_LOG, 0); // Set logging level of DEBUG to 0 to suppress debug logging
 
-  sensuron::SensuronAgent *sensuronAgent = new sensuron::SensuronAgent();
+  sensuron::SensuronAgent* sensuronAgent = new sensuron::SensuronAgent();
 
   sensuronAgent->setSensuronIpAddress(sensuronPortIpAddress);
   sensuronAgent->setSensuronPort(sensuronPort);
   sensuronAgent->setSendDataOid(inputOid);
   sensuronAgent->setReceiveDataOid(outputOid);
 
-  char payloadBuffer[PAYLOAD_SIZE] = {0};
-  sensuron::sensuronPayload_t sensuronPayload{0};
+  char payloadBuffer[PAYLOAD_SIZE] = { 0 };
+  sensuron::sensuronPayload_t sensuronPayload = { 0 };
 
-  sensuronPayload.payload1 = 123456;
-  sensuronPayload.payload2 = 123.456;
+  sensuronPayload.payload1 = 123456789;
+  sensuronPayload.payload2 = 123.456789;
   for (int i = 0; i < sizeof(sensuronPayload.payload3) / sizeof(sensuronPayload.payload3[0]); i++)
   {
-    sensuronPayload.payload3[i] = i + 0.123;
+    sensuronPayload.payload3[i] = 1.123456789f;
   }
 
-  memcpy(payloadBuffer, &sensuronPayload, sizeof(sensuronPayload));
+  size_t payloadSize = sizeof(sensuronPayload);
+  memcpy(payloadBuffer, &sensuronPayload, payloadSize);
 
   sensuronAgent->init();
 
-  sensuronAgent->setPayload(payloadBuffer);
+  sensuronAgent->setPayload(payloadBuffer, payloadSize);
 
   while (true)
   {
